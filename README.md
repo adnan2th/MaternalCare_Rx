@@ -12,7 +12,7 @@ This system is intended for educational and clinical decision-support purposes o
 
 **Adnan Hassan**
 
-Team 
+Team <br>
 Adnan Hassan (Backend)<br>
 Areeba Zeb<br>
 Fatima gohar<br>
