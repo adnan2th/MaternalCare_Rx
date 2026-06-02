@@ -1,9 +1,9 @@
 visit: https://huggingface.co/spaces/adnan2th/d6  <br>
-# 🤰 Maternal GestaGen
+# 🤰 MaternalCare_Rx
 
 ### AI-Powered Clinical Decision Support for Pregnancy Health
 
-Maternal GestaGen is an AI-powered clinical decision support system that analyzes maternal health data, predicts pregnancy-related risks, and provides condition-based treatment and medication recommendations to support healthcare professionals in maternal care.
+MaternalCare_Rx is an AI-powered clinical decision support system that analyzes maternal health data, predicts pregnancy-related risks, and provides condition-based treatment and medication recommendations to support healthcare professionals in maternal care.
 
 ## ⚠️ Disclaimer
 
