@@ -1,0 +1,848 @@
+
+
+/* ================================================================
+   Maternal GestaGen — Clinical Luxury UI  v3.0
+   Design Language : "Obsidian Clinic"
+   Deep navy foundation · Warm ivory panels · Emerald-teal accents
+   Playfair Display headers · DM Sans body · Precision shadows
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap');
+
+/* ══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════════════════════════ */
+:root {
+  /* Navy — page foundation */
+  --navy-950: #060c18;
+  --navy-900: #0a1628;
+  --navy-800: #0f2040;
+  --navy-700: #163158;
+  --navy-600: #1e4275;
+
+  /* Ivory — panel surfaces */
+  --ivory-50:  #fefcf7;
+  --ivory-100: #faf6ed;
+  --ivory-200: #f3ebe0;
+  --ivory-300: #e8ddd0;
+
+  /* Emerald teal — primary accent */
+  --teal-300: #5eead4;
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
+  --teal-700: #0f766e;
+  --teal-800: #115e59;
+
+  /* Rose — danger / alerts */
+  --rose-300: #fda4af;
+  --rose-400: #fb7185;
+  --rose-500: #f43f5e;
+  --rose-600: #e11d48;
+  --rose-700: #be123c;
+
+  /* Gold — highlight */
+  --gold-300: #fcd34d;
+  --gold-400: #fbbf24;
+  --gold-500: #f59e0b;
+  --gold-600: #d97706;
+
+  /* Neutrals */
+  --white:     #ffffff;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  /* Shadows */
+  --shadow-xs:    0 1px 3px rgba(0,0,0,.10);
+  --shadow-sm:    0 2px 8px rgba(0,0,0,.10), 0 1px 3px rgba(0,0,0,.07);
+  --shadow-md:    0 6px 20px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.07);
+  --shadow-lg:    0 16px 48px rgba(0,0,0,.14), 0 6px 18px rgba(0,0,0,.08);
+  --shadow-xl:    0 28px 72px rgba(0,0,0,.18), 0 8px 24px rgba(0,0,0,.10);
+  --shadow-teal:  0 8px 32px rgba(13,148,136,.28);
+  --shadow-rose:  0 8px 32px rgba(244,63,94,.22);
+  --shadow-panel: 0 2px 12px rgba(6,12,24,.08), 0 1px 3px rgba(6,12,24,.05);
+
+  /* Radius */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   22px;
+  --r-xl:   32px;
+  --r-full: 9999px;
+
+  /* Easing */
+  --ease:      cubic-bezier(.4,0,.2,1);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+
+  /* Transitions */
+  --t:      all .26s var(--ease);
+  --t-fast: all .14s var(--ease);
+  --t-slow: all .45s var(--ease-out);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL RESET
+══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body,
+.gradio-container {
+  font-family: var(--font-body) !important;
+  font-size: 14.5px;
+  line-height: 1.6;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  min-height: 100vh;
+}
+
+footer,
+footer.svelte-1lyswbr { display: none !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE BACKGROUND — deep navy atmosphere
+══════════════════════════════════════════════════════════════ */
+
+
+
+/* ══════════════════════════════════════════════════════════════
+   HERO HEADER
+══════════════════════════════════════════════════════════════ */
+.hero-header {
+  position: relative;
+  text-align: center;
+  padding: 72px 32px 60px;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 20% 60%, rgba(13,148,136,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 60% at 80% 30%, rgba(244,63,94,.12)  0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 50% 90%, rgba(251,191,36,.08) 0%, transparent 50%);
+  pointer-events: none;
+  animation: heroGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  from { opacity: .7;  transform: scale(1);    }
+  to   { opacity: 1;   transform: scale(1.06); }
+}
+
+.hero-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 220px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45,212,191,.4), transparent);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: heroIn 1s var(--ease-out) both;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(-32px); }
+  to   { opacity: 1; transform: translateY(0);      }
+}
+
+.hero-icon {
+  font-size: 72px;
+  display: block;
+  margin-bottom: 16px;
+  animation: iconOrbit 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 24px rgba(45,212,191,.40)) drop-shadow(0 6px 16px rgba(244,63,94,.25));
+}
+
+@keyframes iconOrbit {
+  0%,100% { transform: translateY(0)    rotate(0deg);  }
+  33%      { transform: translateY(-9px) rotate(-3deg); }
+  66%      { transform: translateY(-5px) rotate(2deg);  }
+}
+
+.hero-title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.4rem, 4vw, 3.6rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.8px;
+  line-height: 1.10;
+  margin: 0 0 14px !important;
+  background: linear-gradient(135deg, #ffffff 0%, var(--teal-300) 45%, var(--gold-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.08rem !important;
+  font-weight: 400;
+  color: pink !important;
+  margin: 0 0 22px !important;
+  letter-spacing: 0.2px;
+}
+
+.hero-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem !important;
+  font-weight: 600;
+  color: var(--teal-300) !important;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  margin: 0 !important;
+  padding: 8px 22px;
+  border: 1px solid rgba(45,212,191,.25);
+  border-radius: var(--r-full);
+  background: rgba(13,148,136,.10);
+}
+
+.hero-tagline::before,
+.hero-tagline::after {
+  content: '◆';
+  font-size: 0.45rem;
+  opacity: .5;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════════════════════════════ */
+.main-row {
+  gap: 20px !important;
+  padding: 20px 24px !important;
+  margin-bottom: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CARD PANELS
+   CRITICAL: backdrop-filter REMOVED — it traps dropdown lists.
+   Depth achieved through layered box-shadows instead.
+══════════════════════════════════════════════════════════════ */
+.card-panel {
+   
+  background: var(--ivory-50) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--ivory-300) !important;
+  border-radius: var(--r-lg) !important;
+  padding: 28px 28px 32px !important;
+  box-shadow:
+    var(--shadow-panel),
+    0 0 0 1px rgba(255,255,255,.9) inset,
+    0 1px 0 rgba(255,255,255,1) inset !important;
+  transition: box-shadow .35s var(--ease-out), transform .35s var(--ease-out) !important;
+  animation: cardIn .7s var(--ease-out) both;
+  overflow: visible !important;
+  position: relative;
+}
+
+/* Coloured top accent stripe */
+.card-panel::before {
+  margin-top: -300px !important;
+  content: '';
+  position: absolute;
+  top: 0; left: 28px; right: 28px;
+  height: 2px;
+  border-radius: 0 0 var(--r-xs) var(--r-xs);
+  background: linear-gradient(90deg, var(--teal-500), var(--teal-300), var(--gold-400));
+  opacity: .55;
+}
+
+.card-panel:hover {
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(255,255,255,.9) inset,
+    0 1px 0 rgba(255,255,255,1) inset !important;
+  transform: translateY(-2px);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION HEADERS
+══════════════════════════════════════════════════════════════ */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display) !important;
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: var(--navy-800);
+  margin: 26px 0 16px;
+  padding-bottom: 11px;
+  border-bottom: 1.5px solid var(--ivory-200);
+  letter-spacing: 0.1px;
+  position: relative;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1.5px; left: 0;
+  width: 52px; height: 2px;
+  background: linear-gradient(90deg, var(--teal-500), var(--teal-300));
+  border-radius: var(--r-full);
+}
+
+.section-header:first-child { margin-top: 0; }
+.section-icon { font-size: 1.1rem; }
+
+/* ══════════════════════════════════════════════════════════════
+   FORM LABELS
+══════════════════════════════════════════════════════════════ */
+label,
+.gr-form label,
+.gr-block label {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  color: var(--slate-700) !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.1px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DROPDOWN — styled here, positioned by JS in app.py
+══════════════════════════════════════════════════════════════ */
+.dropdown-field,
+.gradio-dropdown {
+  
+  position: relative !important;
+}
+
+.dropdown-field .wrap,
+.gradio-dropdown .wrap {
+  
+  border: 1.5px solid var(--slate-200) !important;
+  border-radius: var(--r-sm) !important;
+  background: #ffffff !important;
+  transition: var(--t) !important;
+  box-shadow: var(--shadow-xs) !important;
+}
+
+.dropdown-field .wrap:focus-within,
+.gradio-dropdown .wrap:focus-within {
+   
+  border-color: var(--teal-400) !important;
+  box-shadow: 0 0 0 3px rgba(45,212,191,.15), var(--shadow-xs) !important;
+}
+
+.dropdown-field input,
+.gradio-dropdown input {
+  font-family: var(--font-body) !important;
+  font-size: 0.89rem !important;
+  color: var(--slate-700) !important;
+  background: transparent !important;
+}
+
+.dropdown-field input::placeholder,
+.gradio-dropdown input::placeholder {
+  color: var(--slate-400) !important;
+  font-style: italic;
+}
+
+.dropdown-field .wrap svg,
+.gradio-dropdown .wrap svg {
+  color: var(--teal-600) !important;
+}
+
+/* Options list */
+.dropdown-field ul.options,
+.gradio-dropdown ul.options,
+ul.options {
+  
+  background: #ffffff !important;
+  border: 1.5px solid var(--teal-400) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--shadow-xl) !important;
+  padding: 8px 6px !important;
+  margin: 0 !important;
+  overflow-y: auto !important;
+  max-height: 240px !important;
+}
+
+ul.options li 
+  {
+  
+  font-family: var(--font-body) !important;
+  font-size: 0.875rem !important;
+  color: var(--slate-700) !important;
+  padding: 10px 14px !important;
+  border-radius: var(--r-xs) !important;
+  cursor: pointer !important;
+  transition: var(--t-fast) !important;
+}
+
+ul.options li:hover {
+  margin-top: 100px !important; 
+  background: linear-gradient(90deg, rgba(204,251,241,.55), rgba(240,253,250,.3)) !important;
+  color: var(--teal-800) !important;
+  padding-left: 18px !important;
+}
+
+ul.options li.selected {
+  background: rgba(204,251,241,.45) !important;
+  color: var(--teal-700) !important;
+  font-weight: 600 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TEXT INPUTS
+══════════════════════════════════════════════════════════════ */
+.gradio-textbox input,
+.gradio-textbox textarea,
+input[type="number"],
+input[type="text"] {
+  border: 1.5px solid var(--slate-200) !important;
+  border-radius: var(--r-sm) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.875rem !important;
+  background: #ffffff !important;
+  color: var(--slate-800) !important;
+  padding: 10px 14px !important;
+  transition: var(--t) !important;
+  box-shadow: var(--shadow-xs) !important;
+}
+
+.gradio-textbox input:focus,
+.gradio-textbox textarea:focus,
+input[type="number"]:focus,
+input[type="text"]:focus {
+  border-color: var(--teal-400) !important;
+  box-shadow: 0 0 0 3px rgba(45,212,191,.15), var(--shadow-xs) !important;
+  outline: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RADIO BUTTONS — pill chip style
+══════════════════════════════════════════════════════════════ */
+.gradio-radio fieldset {
+  border: none !important;
+  padding: 0 !important;
+}
+
+.gradio-radio label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin: 3px 8px 3px 0 !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+  color: var(--slate-600) !important;
+  font-size: 0.86rem !important;
+  padding: 7px 16px !important;
+  border-radius: var(--r-full) !important;
+  border: 1.5px solid var(--slate-200) !important;
+  background: #ffffff !important;
+  transition: var(--t) !important;
+  box-shadow: var(--shadow-xs) !important;
+  user-select: none;
+}
+
+.gradio-radio label:hover {
+  background: rgba(204,251,241,.5) !important;
+  border-color: var(--teal-400) !important;
+  color: var(--teal-800) !important;
+}
+
+.gradio-radio input[type="radio"]:checked + span {
+  color: var(--teal-700) !important;
+  font-weight: 600 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CHECKBOX GROUPS
+══════════════════════════════════════════════════════════════ */
+.gradio-checkbox label,
+.gradio-checkboxgroup label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  font-size: 0.86rem !important;
+  color: var(--slate-600) !important;
+  padding: 5px 12px 5px 8px !important;
+  border-radius: var(--r-sm) !important;
+  transition: var(--t-fast) !important;
+  cursor: pointer !important;
+}
+
+.gradio-checkboxgroup label:hover {
+  background: rgba(204,251,241,.45) !important;
+  color: var(--teal-800) !important;
+}
+
+.red-flag-group label span {
+  color: var(--rose-600) !important;
+  font-weight: 500 !important;
+}
+
+.red-flag-group label:hover {
+  background: rgba(244,63,94,.06) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   QUESTION PANEL HEADERS
+══════════════════════════════════════════════════════════════ */
+.q-header {
+  font-family: var(--font-display) !important;
+  font-style: italic;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--navy-700);
+  background: linear-gradient(100deg, rgba(204,251,241,.45) 0%, rgba(240,253,250,.15) 100%);
+  border-left: 3px solid var(--teal-500);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+ 
+  
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANALYZE BUTTON
+══════════════════════════════════════════════════════════════ */
+.btn-row {
+  justify-content: center !important;
+  padding: 16px 24px 28px !important;
+}
+
+.analyze-btn,
+.analyze-btn button {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: 0.96rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff !important;
+  background: linear-gradient(130deg, var(--teal-700) 0%, var(--teal-500) 50%, var(--teal-400) 100%) !important;
+  border: none !important;
+  border-radius: var(--r-full) !important;
+  padding: 18px 64px !important;
+  min-width: 340px;
+  cursor: pointer;
+  box-shadow: var(--shadow-teal), 0 0 0 1px rgba(45,212,191,.20) inset !important;
+  transition: var(--t-slow) !important;
+}
+
+/* Top glass highlight */
+.analyze-btn::before,
+.analyze-btn button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,.5) 50%, transparent 90%);
+}
+
+/* Shimmer */
+.analyze-btn::after,
+.analyze-btn button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg,
+    transparent 25%,
+    rgba(255,255,255,.20) 45%,
+    rgba(255,255,255,.28) 50%,
+    rgba(255,255,255,.20) 55%,
+    transparent 75%
+  );
+  transform: translateX(-130%);
+  transition: transform .8s var(--ease-out);
+}
+
+.analyze-btn:hover::after,
+.analyze-btn button:hover::after { transform: translateX(130%); }
+
+.analyze-btn:hover,
+.analyze-btn button:hover {
+  transform: translateY(-4px) !important;
+  box-shadow:
+    0 20px 56px rgba(13,148,136,.35),
+    0 8px 20px rgba(13,148,136,.20),
+    0 0 0 1px rgba(45,212,191,.30) inset !important;
+}
+
+.analyze-btn:active,
+.analyze-btn button:active {
+  transform: translateY(-1px) scale(0.99) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   OUTPUT PANEL
+══════════════════════════════════════════════════════════════ */
+.output-panel {
+  padding: 0 24px 32px !important;
+}
+
+.output-header {
+  margin: 0 0 18px !important;
+  font-size: 1.10rem;
+}
+
+.output-box,
+.output-box textarea {
+  background: linear-gradient(160deg, #ffffff 0%, var(--ivory-100) 100%) !important;
+  border: 1.5px solid var(--ivory-300) !important;
+  border-radius: var(--r-lg) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.91rem !important;
+  line-height: 1.80 !important;
+  color: var(--slate-800) !important;
+  padding: 24px !important;
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  transition: var(--t) !important;
+}
+
+.output-box textarea:focus {
+  border-color: var(--teal-400) !important;
+  box-shadow: 0 0 0 3px rgba(45,212,191,.12), var(--shadow-md) !important;
+  outline: none !important;
+}
+
+.output-box .copy-text-button {
+  background: rgba(204,251,241,.5) !important;
+  border: 1px solid rgba(45,212,191,.25) !important;
+  border-radius: var(--r-xs) !important;
+  color: var(--teal-700) !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  transition: var(--t-fast) !important;
+}
+
+.output-box .copy-text-button:hover {
+  background: rgba(204,251,241,.85) !important;
+  border-color: var(--teal-400) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DISCLAIMER FOOTER
+══════════════════════════════════════════════════════════════ */
+.disclaimer-footer {
+  margin: 0 24px 40px !important;
+  padding: 20px 32px !important;
+  background: rgba(10,22,40,.65) !important;
+  border: 1px solid rgba(45,212,191,.15) !important;
+  border-radius: var(--r-lg) !important;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.disclaimer-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--teal-400), var(--gold-400), transparent);
+}
+
+.disclaimer-footer p {
+  margin: 0 !important;
+  font-size: 0.845rem !important;
+  color: rgba(255,255,255,.48) !important;
+  font-family: var(--font-body) !important;
+  line-height: 1.7;
+}
+
+.disclaimer-footer strong { color: var(--rose-300) !important; }
+.disclaimer-footer em     { color: var(--teal-300) !important; font-style: normal; font-weight: 500; }
+
+/* ══════════════════════════════════════════════════════════════
+   GRADIO OVERRIDES
+══════════════════════════════════════════════════════════════ */
+.gradio-container .prose { font-family: var(--font-body) !important; }
+.gr-button-primary { background: linear-gradient(130deg, var(--teal-600), var(--teal-400)) !important; }
+*:focus { outline: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar         { width: 5px; height: 5px; }
+::-webkit-scrollbar-track   { background: rgba(255,255,255,.06); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb   { background: linear-gradient(var(--teal-500), var(--teal-400)); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--teal-300); }
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING STATE
+══════════════════════════════════════════════════════════════ */
+.analyze-btn.loading,
+.analyze-btn button.loading {
+  animation: btnBreath 1s ease-in-out infinite;
+}
+
+@keyframes btnBreath {
+  0%,100% { box-shadow: var(--shadow-teal); }
+  50%      { box-shadow: 0 4px 12px rgba(13,148,136,.15); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero-header  { padding: 44px 16px 40px; }
+  .hero-icon    { font-size: 56px; }
+  .hero-title   { font-size: 1.95rem !important; }
+  .hero-tagline { font-size: 0.66rem !important; letter-spacing: 2.5px; }
+
+  .main-row {
+    flex-direction: column !important;
+    padding: 12px !important;
+  }
+
+  .card-panel { padding: 20px !important; }
+
+  .analyze-btn,
+  .analyze-btn button { min-width: 260px; padding: 16px 40px !important; }
+
+  .output-panel      { padding: 0 12px 24px !important; }
+  .disclaimer-footer { margin: 0 12px 28px !important; padding: 16px 20px !important; }
+}
+
+@media (max-width: 480px) {
+  .hero-title  { font-size: 1.65rem !important; }
+  .card-panel  { border-radius: var(--r-md) !important; }
+  .analyze-btn,
+  .analyze-btn button { min-width: 220px; font-size: 0.86rem !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VISUAL ANALYTICS & AI TOOLBOX PANELS
+══════════════════════════════════════════════════════════════ */
+
+/* Wrapper row for the two new panels */
+.analytics-row {
+  gap: 20px !important;
+  padding: 0 24px 28px !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* White card wrapper for each panel */
+.analytics-card {
+  background: #ffffff !important;
+  border: 1.5px solid var(--ivory-300) !important;
+  border-radius: var(--r-lg) !important;
+  padding: 0 0 24px 0 !important;
+  box-shadow:
+    0 2px 12px rgba(6,12,24,.08),
+    0 1px 3px rgba(6,12,24,.05),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+  overflow: hidden;
+}
+
+/* Coloured header banner inside each card */
+.analytics-heading {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2px;
+  color: #ffffff !important;
+  padding: 16px 22px !important;
+  margin: 0 0 18px 0 !important;
+  border-radius: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Visual Analytics — teal gradient */
+.analytics-heading.chart-heading {
+  background: linear-gradient(130deg, var(--teal-700) 0%, var(--teal-500) 60%, var(--teal-400) 100%) !important;
+}
+
+/* AI Toolbox — navy-to-teal gradient */
+.analytics-heading.ai-heading {
+  background: linear-gradient(130deg, var(--navy-800) 0%, var(--navy-700) 50%, var(--teal-700) 100%) !important;
+}
+
+/* Shimmer line on top of each heading */
+.analytics-heading::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,.45) 50%, transparent 90%);
+}
+
+/* Icon badge inside heading */
+.analytics-heading .heading-icon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+}
+
+/* Content area padding */
+.analytics-card-body {
+  padding: 0 22px !important;
+}
+
+/* AI explanation textbox override inside toolbox card */
+.toolbox-text,
+.toolbox-text textarea {
+  background: linear-gradient(160deg, var(--ivory-50) 0%, var(--ivory-100) 100%) !important;
+  border: 1.5px solid var(--ivory-300) !important;
+  border-radius: var(--r-md) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.85 !important;
+  color: var(--slate-800) !important;
+  padding: 20px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+
+/* Chart image container */
+.chart-image-wrap img {
+  border-radius: var(--r-md) !important;
+  border: 1.5px solid var(--ivory-300) !important;
+  box-shadow: var(--shadow-sm) !important;
+  width: 100% !important;
+}
+
+/* Subtle badge pill showing confidence/severity */
+.analytics-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--r-full);
+  margin: 0 22px 14px;
+}
+.analytics-badge.teal  { background: rgba(204,251,241,.55); color: var(--teal-700); border: 1px solid rgba(13,148,136,.2); }
+.analytics-badge.navy  { background: rgba(15,32,64,.07);    color: var(--navy-700); border: 1px solid rgba(15,32,64,.15); }
+
+@media (max-width: 768px) {
+  .analytics-row { flex-direction: column !important; padding: 0 12px 20px !important; }
+  .analytics-heading { font-size: 0.95rem !important; padding: 13px 16px !important; }
+}
+
+
+
